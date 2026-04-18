@@ -1,5 +1,5 @@
 
-# PeopleFlow
+# Laboratório de Infraestrutura DevOps
 
 Projeto de estudo em DevOps com um CRUD simples de usuários, dividido em backend e frontend.
 
