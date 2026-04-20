@@ -2,13 +2,12 @@ from uuid import UUID
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
-from app.database import get_session  # Verifique se este nome bate com o database.py
+from app.database import get_session  
 from app.model.user import User
 from app.schemas.user import UserCreate, UserResponse
 from app.core.security import hash_password
 
 router = APIRouter(prefix="/users", tags=["Users"])
-
 
 def normalize_digits(value: str | None) -> str | None:
     if value is None:
@@ -36,8 +35,10 @@ def is_valid_cpf(cpf: str | None) -> bool:
 
 @router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def create_user(user_data: UserCreate, session: Session = Depends(get_session)):
+    
     # 1. Verificar conflitos de e-mail e CPF
     user_dict = user_data.model_dump()
+    user_dict["email"] = user_dict["email"].strip().lower()
     user_dict["cpf"] = normalize_digits(user_dict.get("cpf"))
     user_dict["zip_code"] = normalize_digits(user_dict.get("zip_code"))
 
@@ -67,20 +68,16 @@ def create_user(user_data: UserCreate, session: Session = Depends(get_session)):
                 detail="Usuário com este CPF já cadastrado."
             )
 
-    # --- CORREÇÃO AQUI ---
-    # --- CORREÇÃO ROBUSTA ---
     # 1. Extraímos os dados brutos em um dicionário
     # 2. Geramos o hash da senha
     password_plain = user_dict.pop("password")
     hashed = hash_password(password_plain)
     
     # 3. Criamos o objeto User passando os campos um a um
-    # O operador **user_dict passa todos os campos restantes (email, full_name, etc.)
-    # E passamos o password_hash explicitamente
-    new_user = User(**user_dict, password_hash=hashed)
-    # -------------------------
 
-    # 4. Persistência (restante do código igual)
+    new_user = User(**user_dict, password_hash=hashed)
+
+    # 4. Persistência 
     try:
         session.add(new_user)
         session.commit()
@@ -88,7 +85,7 @@ def create_user(user_data: UserCreate, session: Session = Depends(get_session)):
         return new_user
     except Exception as e:
         session.rollback()
-        print(f"Erro ao salvar: {e}") # Ajuda a debugar se o banco falhar
+        print(f"Erro ao salvar: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Erro interno ao salvar no banco de dados."

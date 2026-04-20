@@ -1,11 +1,3 @@
-# from fastapi import APIRouter
-
-# router = APIRouter(prefix="/auth", tags=["Auth"])
-
-# @router.post("/login")
-# def login():
-#     return {"token": "jwt-token"}
-
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
 from app.database import get_session
@@ -17,8 +9,10 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 
 @router.post("/login")
 def login(login_data: LoginRequest, session: Session = Depends(get_session)):
+    email = login_data.email.strip().lower()
+
     # 1. Busca o usuário pelo e-mail
-    user = session.exec(select(User).where(User.email == login_data.email)).first()
+    user = session.exec(select(User).where(User.email == email)).first()
     
     if not user:
         raise HTTPException(

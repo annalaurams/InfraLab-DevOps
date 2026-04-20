@@ -3,7 +3,7 @@ from fastapi import HTTPException
 
 async def busca_cep(cep: str):
     # Consulta a BrasilAPI e normaliza a resposta para o formato do ViaCEP,
-    # que é o que o frontend já espera.
+
     url = f"https://brasilapi.com.br/api/cep/v1/{cep}"
     
     async with httpx.AsyncClient() as client:
