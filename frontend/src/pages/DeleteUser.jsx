@@ -140,7 +140,7 @@ export default function DeleteUser() {
 		(async () => {
 			try {
 				setLoading(true);
-				const res = await fetch("http://localhost:8000/users/");
+				const res = await fetch("/users/");
 				if (!res.ok) throw new Error();
 				const data = await res.json();
 				setUsers(Array.isArray(data) ? data : []);
@@ -167,7 +167,7 @@ export default function DeleteUser() {
 		if (!ok) return;
 
 		try {
-			const res = await fetch(`http://localhost:8000/users/${user.id}`, { method: "DELETE" });
+			const res = await fetch(`/users/${user.id}`, { method: "DELETE" });
 			if (!res.ok && res.status !== 204) throw new Error();
 			setUsers((prev) => prev.filter((u) => u.id !== user.id));
 			setMsg(`Usuário ${user.full_name} deletado com sucesso.`);

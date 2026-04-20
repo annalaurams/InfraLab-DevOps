@@ -220,7 +220,7 @@ export default function RegisterForm() {
   const handleCepLookup = async (cep) => {
     if (cep.length !== 8) return;
     try {
-      const res = await fetch(`http://localhost:8000/address/cep/${cep}`);
+      const res = await fetch(`/address/cep/${cep}`);
       if (!res.ok) return;
       const data = await res.json();
       setForm((prev) => ({
@@ -285,7 +285,7 @@ export default function RegisterForm() {
       education: optional(form.education), job_title: optional(form.job_title),
     };
     try {
-      const res = await fetch("http://localhost:8000/users/", {
+      const res = await fetch("/users/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

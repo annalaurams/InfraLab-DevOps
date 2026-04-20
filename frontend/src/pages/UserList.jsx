@@ -289,7 +289,7 @@ export default function UserList() {
           } catch { return null; }
         })();
 
-        const res = await fetch("http://localhost:8000/users/", {
+        const res = await fetch("/users/", {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
 

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
-import RegisterForm from "./components/RegisterForm"; // ou ./pages/Register se você moveu também
+import RegisterForm from "./pages/RegisterForm"; // ou ./pages/Register se você moveu também
 import UserMenu from "./pages/UserMenu";
 import EditUser from "./pages/EditUser";
 import DeleteUser from "./pages/DeleteUser";

@@ -144,7 +144,7 @@ export default function UserMenu() {
   useEffect(() => {
     if (authState !== "ok" || !user?.email) return;
 
-    fetch("http://localhost:8000/users/")
+    fetch("/users/")
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();

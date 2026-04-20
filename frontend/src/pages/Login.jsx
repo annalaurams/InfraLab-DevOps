@@ -85,7 +85,7 @@ export default function LoginForm({ onNavigateToRegister }) {
     setStatus("sending");
 
     try {
-      const res = await fetch("http://localhost:8000/auth/login", {
+      const res = await fetch("/auth/login", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ email: form.email.trim(), password: form.password }),

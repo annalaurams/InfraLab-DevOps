@@ -174,7 +174,7 @@ export default function EditUser() {
 		(async () => {
 			try {
 				setLoading(true);
-				const res = await fetch("http://localhost:8000/users/");
+				const res = await fetch("/users/");
 				if (!res.ok) throw new Error();
 				const data = await res.json();
 				const list = Array.isArray(data) ? data : [];
@@ -243,7 +243,7 @@ export default function EditUser() {
 		Object.keys(payload).forEach((k) => payload[k] === undefined && delete payload[k]);
 
 		try {
-			const res = await fetch(`http://localhost:8000/users/${selectedId}`, {
+			const res = await fetch(`/users/${selectedId}`, {
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(payload),
