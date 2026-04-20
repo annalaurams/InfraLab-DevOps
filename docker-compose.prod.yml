@@ -1,0 +1,39 @@
+services:
+  api:
+    build:
+      context: .
+      target: final
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env.prod
+    environment:
+      - APP_ENV=prod
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    env_file:
+      - ./backend/.env.prod
+    # Reforçamos as variáveis aqui para garantir que o Postgres as leia na primeira inicialização
+    environment:
+      - POSTGRES_USER=anna
+      - POSTGRES_PASSWORD=Anna182135
+      - POSTGRES_DB=peopleprod
+    healthcheck:
+      # Note o uso de single quotes para evitar problemas com o shell
+      test: ["CMD-SHELL", "pg_isready -U anna -d peopleprod"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    volumes:
+      - postgres_prod_data_v2:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  # Mudamos o nome para v2 para forçar o Docker a criar um banco limpo e novo
+  postgres_prod_data_v2:
