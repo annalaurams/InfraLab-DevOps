@@ -15,8 +15,10 @@ spec:
     spec:
       containers:
         - name: api
-          image: devops-api:latest
-          imagePullPolicy: Never
+          # image: devops-api:latest
+          # imagePullPolicy: Never
+          image: annalaurasm/devopspeople:latest
+          imagePullPolicy: Always    # baixa sempre do DockerHub
           ports:
             - containerPort: 8000
           envFrom:

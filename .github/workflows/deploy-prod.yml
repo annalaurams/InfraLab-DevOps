@@ -1,0 +1,27 @@
+name: Deploy Prod
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Login no DockerHub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Build e push da imagem
+        run: |
+          docker build -t annalaurasm/devopspeople:${{ github.ref_name }} .
+          docker push annalaurasm/devopspeople:${{ github.ref_name }}
+
+      - name: Atualiza imagem no Kubernetes
+        run: |
+          kubectl set image deployment/api api=annalaurasm/devopspeople:${{ github.ref_name }} -n prod
+          kubectl rollout status deployment/api -n prod
