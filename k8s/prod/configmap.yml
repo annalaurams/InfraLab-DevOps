@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: prod
+data:
+  DEBUG: "false"
+  ALGORITHM: "HS256"
+  ACCESS_TOKEN_EXPIRE_MINUTES: "120"
+  POSTGRES_DB: "peopleprod"
+  POSTGRES_USER: "anna"
+  APP_ENV: "prod"
