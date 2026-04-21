@@ -151,4 +151,8 @@ projeto/
 ## Documentação por módulo
 
 - Backend: [backend/README.md](backend/README.md)
+<<<<<<< HEAD
 - Frontend: [frontend/README.md](frontend/README.md)
+=======
+- Frontend: [frontend/README.md](frontend/README.md)
+>>>>>>> 5cf722a (chore: ajustes locais antes do rebase)

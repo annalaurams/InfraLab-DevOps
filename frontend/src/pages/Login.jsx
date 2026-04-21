@@ -85,7 +85,8 @@ export default function LoginForm({ onNavigateToRegister }) {
     setStatus("sending");
 
     try {
-      const res = await fetch("/auth/login", {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+      const res = await fetch(`${apiUrl}/auth/login`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ email: form.email.trim(), password: form.password }),
