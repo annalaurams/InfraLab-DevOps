@@ -1,3 +1,30 @@
-.env.dev
-.env.prod
+# secrets — nunca no git
+backend/.env
+backend/.env.dev
+backend/.env.prod
+k8s/prod/secret.yml
+k8s/dev/secret.yml
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.coverage
+
+# node
+node_modules/
+dist/
+frontend/dist/
+backend/frontend/
+
+# tools
 actions-runner/
+.vscode/
+.DS_Store
+.idea/
+.venv/
+.pdm.toml
+.pdm.lock
