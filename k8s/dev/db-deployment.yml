@@ -1,29 +1,29 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment  # tipo: descreve como rodar e manter pods rodando
 metadata:
   name: db
   namespace: dev
 spec:
-  replicas: 1
+  replicas: 1 # quantas cópias do pod rodam simultaneamente
   selector:
     matchLabels:
-      app: db
-  template:
+      app: db # o deployment gerencia pods que tenham esse label
+  template: # template do pod que será criado
     metadata:
       labels:
-        app: db
+        app: db  # label do pod — precisa bater com o matchLabels acima
     spec:
       containers:
         - name: db
-          image: postgres:16-alpine
+          image: postgres:16-alpine  # imagem Docker
           ports:
             - containerPort: 5432
-          env:
+          env: # variáveis 
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
-                  name: api-config
-                  key: POSTGRES_USER
+                  name: api-config # de qual configmap pegar
+                  key: POSTGRES_USER # qual chave dentro do configmap
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
@@ -32,9 +32,9 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: api-secret
+                  name: api-secret # de qual secret pegar
                   key: POSTGRES_PASSWORD
-          volumeMounts:
+          volumeMounts: # nome do volume definido abaixo
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
       volumes:

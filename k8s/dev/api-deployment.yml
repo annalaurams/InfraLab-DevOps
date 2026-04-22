@@ -4,7 +4,7 @@ metadata:
   name: api
   namespace: dev
 spec:
-  replicas: 1
+  replicas: 1  # 1 cópias da api rodando simultaneamente em dev
   selector:
     matchLabels:
       app: api
@@ -17,11 +17,11 @@ spec:
         - name: api
           # image: devops-api:latest
           # imagePullPolicy: Never
-          image: annalaurasm/devopspeople:latest
+          image: annalaurasm/devopspeople:latest # imagem que você buildou com o Dockerfile
           imagePullPolicy: Always    # baixa sempre do DockerHub
           ports:
             - containerPort: 8000
-          envFrom:
+          envFrom:  # injeta TODAS as chaves de uma vez
             - configMapRef:
                 name: api-config
             - secretRef:
@@ -33,13 +33,13 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "250m"
-          livenessProbe:
+          livenessProbe: # verifica se o container está vivo
             httpGet:
-              path: /docs
+              path: /docs # faz um GET em /docs
               port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-          readinessProbe:
+            initialDelaySeconds: 10  # espera 10s antes de começar a verificar
+            periodSeconds: 10  # verifica a cada 10s
+          readinessProbe:  # verifica se está pronto para receber tráfego
             httpGet:
               path: /docs
               port: 8000

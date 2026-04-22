@@ -17,7 +17,7 @@ spec:
         - name: api
           # image: devops-api:latest
           # imagePullPolicy: Never
-          image: annalaurasm/devopspeople:latest
+          image: annalaurasm/devopspeople:latest 
           imagePullPolicy: Always    # baixa sempre do DockerHub
           ports:
             - containerPort: 8000

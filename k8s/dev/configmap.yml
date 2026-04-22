@@ -1,12 +1,12 @@
 apiVersion: v1
-kind: ConfigMap
+kind: ConfigMap  # tipo: mapa de configuração, variáveis não sensíveis
 metadata:
-  name: api-config
-  namespace: dev
+  name: api-config # nome pelo qual os outros arquivos referenciam este configmap
+  namespace: dev # a qual namespace pertence
 data:
   DEBUG: "true"
-  ALGORITHM: "HS256"
+  ALGORITHM: "HS256" # Algoritmo usado pra assinar tokens (JWT, por exemplo)
   ACCESS_TOKEN_EXPIRE_MINUTES: "60"
   POSTGRES_DB: "peopledev"
   POSTGRES_USER: "anna"
-  APP_ENV: "dev"
+  APP_ENV: "dev" # Define o ambiente da aplicação

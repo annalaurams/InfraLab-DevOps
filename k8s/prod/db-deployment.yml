@@ -39,12 +39,12 @@ spec:
               mountPath: /var/lib/postgresql/data
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "100m"
+              memory: "256Mi" # mínimo garantido de memória
+              cpu: "100m" # mínimo garantido de CPU
             limits:
-              memory: "1Gi"
+              memory: "1Gi"  # máximo permitido — se passar, o pod é reiniciado
               cpu: "500m"
       volumes:
-        - name: postgres-data
+        - name: postgres-data # nome do volume usado no volumeMounts acima
           persistentVolumeClaim:
-            claimName: postgres-pvc
+            claimName: postgres-pvc # referencia o pvc que criamos no db-pvc.yml

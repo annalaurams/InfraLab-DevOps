@@ -1,11 +1,13 @@
 apiVersion: v1
-kind: Service
+kind: Service # tipo: expõe um deployment para receber tráfego
 metadata:
-  name: db
+  name: db # nome importante — é o hostname usado na DATABASE_URL
   namespace: dev
 spec:
   selector:
-    app: db
+    app: db  encaminha tráfego para pods com esse label
   ports:
-    - port: 5432
-      targetPort: 5432
+    - port: 5432   # porta que o service expõe dentro do cluster
+      targetPort: 5432 # porta que o container do db está ouvindo, definida no deployment
+
+      # sem "type" definido = ClusterIP (só acessível dentro do cluster)

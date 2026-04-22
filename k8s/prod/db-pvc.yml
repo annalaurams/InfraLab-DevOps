@@ -1,11 +1,11 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolumeClaim  # tipo: pedido de espaço em disco persistente
 metadata:
-  name: postgres-pvc
+  name: postgres-pvc # nome referenciado no db-deployment
   namespace: prod
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce  # só um pod pode escrever por vez 
   resources:
-    requests:
-      storage: 5Gi
+    requests: 
+      storage: 5Gi   # reserva 5GB de disco para os dados do banco

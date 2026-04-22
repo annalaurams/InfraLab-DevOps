@@ -1,4 +1,4 @@
-apiVersion: v1
-kind: Namespace
+apiVersion: v1 # versão da API do Kubernetes para este tipo de recurso
+kind: Namespace  # tipo do recurso que está sendo criado
 metadata:
-  name: dev
+  name: dev # nome do namespace — usado em todos os outros arquivos
