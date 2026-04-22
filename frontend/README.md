@@ -1,33 +1,35 @@
-# PeopleFlow Frontend
+# Frontend
 
-Interface web do projeto PeopleFlow, responsável pelo cadastro, edição, login e consulta de usuários.
+Interface web do projeto, um CRUD completo para usuários.
 
 ## Funcionalidades
-
-- Formulário de cadastro com máscara de CPF e CEP
 - Preenchimento automático de endereço pelo CEP
 - Tela de login
-- Listagem de usuários
-- Edição e exclusão de registros
-- Layout responsivo com visual institucional
+- Listagem, edição e exclusão usuário
 
-## Tecnologias
+# Estrutura de Pastas
 
-<p>
-	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-	<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-	<img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
-	<img src="https://img.shields.io/badge/React%20Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white" />
-	<img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-	<img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-</p>
-
-## Estrutura
-
-- src/components: componentes reutilizáveis
-- src/pages: páginas da aplicação
-- src/assets: arquivos estáticos
-- src/main.jsx: entrada da aplicação
+```
+frontend/
+├── .env
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── README.md
+├── vite.config.js
+└── src/
+	├── App.jsx
+	├── index.css
+	├── main.jsx
+	└── pages/
+		├── DeleteUser.jsx
+		├── EditUser.jsx
+		├── Login.jsx
+		├── RegisterForm.jsx
+		├── UserList.jsx
+		└── UserMenu.jsx
+```
 
 ## Como rodar
 

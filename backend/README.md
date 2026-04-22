@@ -8,20 +8,7 @@ API do projeto, responsável por autenticação, cadastro, exclusão, edição e
 - Login com senha hash
 - Listagem, edição e exclusão de usuários
 - Busca de endereço por CEP via API externa
-- Documentação automática com Swagger
-
-## Tecnologias
-
-<p>
-	<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-	<img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
-	<img src="https://img.shields.io/badge/SQLModel-4B8BBE?style=for-the-badge&logo=sqlalchemy&logoColor=white" />
-	<img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
-	<img src="https://img.shields.io/badge/Uvicorn-2D3748?style=for-the-badge&logo=uvicorn&logoColor=white" />
-	<img src="https://img.shields.io/badge/HTTPX-3A3A3A?style=for-the-badge&logo=httpx&logoColor=white" />
-	<img src="https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic&logoColor=white" />
-	<img src="https://img.shields.io/badge/Bcrypt-4A5568?style=for-the-badge&logo=key&logoColor=white" />
-</p>
+- Documentação automática com Swagger: `http://127.0.0.1:8000/docs`
 
 ## Estrutura
 
@@ -72,12 +59,6 @@ secret_key=sua_chave_secreta
 algorithm=HS256
 ```
 
-### Campos
-
-- database_url: string de conexão do banco
-- secret_key: chave usada para autenticação e segurança
-- algorithm: algoritmo JWT utilizado pela aplicação
-
 Exemplos de database_url:
 
 ```env
@@ -85,10 +66,3 @@ database_url=sqlite:///./dev.db
 database_url=postgresql+psycopg://postgres:postgres@localhost:5432/peopleflow
 ```
 
-## Documentação
-
-- Swagger: http://127.0.0.1:8000/docs
-- ReDoc: http://127.0.0.1:8000/redoc
-
-
- 

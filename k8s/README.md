@@ -1,3 +1,21 @@
+# Imagem Docker no Docker Hub
+
+
+O deploy da API no Kubernetes utiliza uma imagem Docker publicada no Docker Hub, no repositório:
+
+    annalaurasm/devopspeople:latest
+
+Essa imagem é construída localmente, enviada (push) para o Docker Hub e então referenciada nos manifests de produção (api-deployment.yml) para que o cluster possa baixá-la automaticamente. Assim, não é necessário buildar a imagem dentro do cluster, garantindo agilidade e reprodutibilidade no deploy.
+
+Passos principais:
+1. Build da imagem localmente:
+    docker build -t annalaurasm/devopspeople:latest .
+2. Login no Docker Hub:
+    docker login
+3. Push da imagem:
+    docker push annalaurasm/devopspeople:latest
+4. O Kubernetes puxa a imagem do Docker Hub ao criar os pods da API.
+
 # Kubernetes — Ambientes Dev e Prod
 
 ## Estrutura
@@ -31,6 +49,8 @@ k8s/
 | Banco de dados | emptyDir (dados não persistem) | PVC 5Gi (dados persistem) |
 | DEBUG | true | false |
 | NodePort | 30080 | 30081 |
+| Imagem da API | build local (devops-api:latest) | Docker Hub (annalaurasm/devopspeople:latest) |
+
 
 ## Primeira vez — subir do zero
 
@@ -133,8 +153,3 @@ kubectl delete -f k8s/dev/
 minikube delete
 ```
 
-## Observações
-
-- O `secret.yml` nunca deve ir para o git — adicione ao `.gitignore`
-- Após atualizar o frontend use aba anônima para evitar cache
-- O IP do minikube pode mudar — sempre use `minikube service` para abrir no browser
