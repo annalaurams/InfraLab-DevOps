@@ -5,7 +5,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    app: db  encaminha tráfego para pods com esse label
+    app: db  # encaminha tráfego para pods com esse label
   ports:
     - port: 5432   # porta que o service expõe dentro do cluster
       targetPort: 5432 # porta que o container do db está ouvindo, definida no deployment
