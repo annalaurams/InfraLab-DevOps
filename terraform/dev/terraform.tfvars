@@ -1,0 +1,10 @@
+namespace         = "dev"
+postgres_user     = "anna"
+postgres_password = "Anna182135"
+postgres_db       = "appdb_dev"
+secret_key        = "dev-secret-key"
+database_url      = "postgresql://anna:Anna182135@db:5432/appdb_dev"
+debug             = "true"
+app_env           = "dev"
+api_replicas      = 1
+node_port         = 30082
