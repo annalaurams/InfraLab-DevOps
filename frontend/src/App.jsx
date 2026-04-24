@@ -5,6 +5,7 @@ import UserMenu from "./pages/UserMenu";
 import EditUser from "./pages/EditUser";
 import DeleteUser from "./pages/DeleteUser";
 import UserList from "./pages/UserList";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
@@ -12,10 +13,26 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/menu" element={<UserMenu />} />
-        <Route path="/edit-user" element={<EditUser />} />
-        <Route path="/list-user" element={<UserList />} />
-        <Route path="/delete-user" element={<DeleteUser />} />
+        <Route path="/menu" element={
+          <PrivateRoute>
+            <UserMenu />
+          </PrivateRoute>
+        } />
+        <Route path="/edit-user" element={
+          <PrivateRoute>
+            <EditUser />
+          </PrivateRoute>
+        } />
+        <Route path="/list-user" element={
+          <PrivateRoute>
+            <UserList />
+          </PrivateRoute>
+        } />
+        <Route path="/delete-user" element={
+          <PrivateRoute>
+            <DeleteUser />
+          </PrivateRoute>
+        } />
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>

@@ -8,17 +8,17 @@ export default defineConfig({
   server: {
     proxy: {
       '/auth': {
-        target: 'http://192.168.49.2:30081',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path,
       },
       '/users': {
-        target: 'http://192.168.49.2:30081',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path,
       },
       '/address': {
-        target: 'http://192.168.49.2:30081',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path,
       },
@@ -28,4 +28,4 @@ export default defineConfig({
 
 //  trocar api por local host quando não utilizar docker
 // trocar para api: quando for docker
-// trocar para http://192.168.49.2: quando for minikube
+// trocar para http://192.168.49.2: quando for minikube http://192.168.49.2:30081

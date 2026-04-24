@@ -85,7 +85,9 @@ export default function LoginForm({ onNavigateToRegister }) {
     setStatus("sending");
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      // const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
       const res = await fetch(`${apiUrl}/auth/login`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,11 +98,13 @@ export default function LoginForm({ onNavigateToRegister }) {
         let data = {};
         try { data = await res.json(); } catch { /* body vazio */ }
 
+        // Salva o token JWT junto com os dados do usuário
         const session = {
           user_id: data?.user_id,
           full_name: data?.full_name,
           email: data?.email || form.email.trim(),
           role: data?.role,
+          token: data?.access_token, // <-- Adiciona o token JWT
           logged_at: new Date().toISOString(),
         };
 
