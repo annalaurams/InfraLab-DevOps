@@ -5,6 +5,7 @@ from app.database import create_db_and_tables, seed_dev_admin_if_empty
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
+from prometheus_fastapi_instrumentator import Instrumentator
 import os
 from app.config import settings
 
@@ -16,16 +17,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="PeopleFlow API", lifespan=lifespan)
 
+Instrumentator().instrument(app).expose(app)
+
 app.add_middleware(
     CORSMiddleware,
-    # allow_origins=["http://localhost:5173", "http://localhost:8000"],
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:8000",
-        "http://192.168.49.2:30081",
-        "http://192.168.49.2:5173",
-        "http://192.168.49.2:30082"
-    ],
+    allow_origins=["http://192.168.49.2:30081"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,15 +33,14 @@ app.include_router(address.router)
 
 @app.get("/")
 async def root():
-    if settings.debug:
-        return RedirectResponse(url="http://localhost:5173/frontend", status_code=307)
-    return RedirectResponse(url="/frontend", status_code=307)
+    return RedirectResponse(url="/frontend/", status_code=307)
 
-FRONTEND_DIST = os.path.join(os.getcwd(), "frontend", "dist")
+@app.get("/frontend/{catchall:path}")
+async def serve_frontend(catchall: str):
+    FRONTEND_DIST = os.path.join(os.getcwd(), "frontend", "dist")
+    file_path = os.path.join(FRONTEND_DIST, catchall)
+    if os.path.exists(file_path) and os.path.isfile(file_path):
+        return FileResponse(file_path)
+    return FileResponse(os.path.join(FRONTEND_DIST, "index.html"))
 
-if os.path.exists(FRONTEND_DIST):
-    app.mount("/frontend", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
-
-    @app.get("/frontend/{catchall:path}")
-    async def serve_frontend(catchall: str):
-        return FileResponse(os.path.join(FRONTEND_DIST, "index.html"))
+app.mount("/frontend", StaticFiles(directory=os.path.join(os.getcwd(), "frontend", "dist"), html=True), name="frontend")

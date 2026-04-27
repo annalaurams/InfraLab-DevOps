@@ -1,4 +1,2 @@
-import bcrypt
-senha = "123456"
-hash = bcrypt.hashpw(senha.encode("utf-8"), bcrypt.gensalt())
-print(hash.decode())
+from app.core.security import hash_password
+print(hash_password("123456"))

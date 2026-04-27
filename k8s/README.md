@@ -152,4 +152,3 @@ kubectl delete -f k8s/dev/
 # remove o cluster inteiro
 minikube delete
 ```
-

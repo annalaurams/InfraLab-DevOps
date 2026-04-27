@@ -417,7 +417,7 @@ export default function UserMenu() {
                 Menu principal
               </h1>
               <p style={{ margin: 0, color: C.textMuted, fontSize: "0.82rem", fontFamily: FONT_BODY }}>
-                Selecione uma ação para continuar
+                
               </p>
             </div>
 
