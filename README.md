@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Projeto fullstack com backend em Python (FastAPI), frontend em React (Vite) e banco de dados PostgreSQL. O objetivo é estudar e aplicar práticas e ferramentas de DevOps em uma aplicação real de cadastro de usuários com autenticação, CRUD completo e integração com API externa (ViaCEP).
+Projeto fullstack com o objetivo de estudar e aplicar práticas e ferramentas de DevOps em uma aplicação de cadastro de usuários com autenticação, CRUD completo e integração com API externa.
 
 ## Tecnologias
 
@@ -27,10 +27,9 @@ Projeto fullstack com backend em Python (FastAPI), frontend em React (Vite) e ba
 
 ## Funcionalidades da aplicação
 
-- Cadastro de usuários com validação de CPF e e-mail
 - Autenticação com JWT
-- Preenchimento automático de endereço via CEP (ViaCEP)
-- Listagem, edição e exclusão de usuários
+- Preenchimento automático de endereço via CEP
+- Cadastrom, listagem, edição e exclusão de usuários
 - Controle de acesso por perfil (role)
 
 ## Estrutura do projeto
@@ -43,9 +42,6 @@ InfraLab-DevOps/
 │   ├── dev/                    # Ambiente de desenvolvimento
 │   ├── prod/                   # Ambiente de produção
 │   └── monitoring/             # ServiceMonitor do Prometheus
-├── terraform/                  # Infraestrutura como código (dev)
-│   └── dev/
-│       └── terraform.tfvars
 ├── .github/
 │   └── workflows/              # Pipelines CI/CD
 │       ├── deploy-dev.yml
@@ -63,7 +59,6 @@ InfraLab-DevOps/
 | Conteinerização | Docker | Dockerfile multi-stage para build enxuto |
 | Orquestração local | Docker Compose | Ambientes dev e prod separados |
 | Orquestração em cluster | Kubernetes | Deployments, Services, Secrets, ConfigMaps, PVC |
-| IaC | Terraform | Gerencia o namespace dev no Minikube |
 | CI/CD | GitHub Actions | Build, push DockerHub e deploy automático |
 | Métricas | Prometheus | Coleta métricas da API a cada 15s |
 | Dashboards | Grafana | Painéis de requisições, latência, memória e alertas |
@@ -109,15 +104,6 @@ minikube service api-service -n prod
 |---|---|
 | Produção | http://\<minikube-ip\>:30081/frontend/login |
 | Desenvolvimento | http://\<minikube-ip\>:30082/frontend/login |
-
-### Com Terraform (ambiente dev)
-
-```bash
-cd terraform
-terraform init
-terraform plan -var-file="dev/terraform.tfvars"
-terraform apply -var-file="dev/terraform.tfvars"
-```
 
 ## CI/CD
 
