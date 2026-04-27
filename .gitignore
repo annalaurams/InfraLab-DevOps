@@ -2,6 +2,8 @@
 backend/.env
 backend/.env.dev
 backend/.env.prod
+frontend/.env.production
+frontend/.env.development
 k8s/prod/secret.yml
 k8s/dev/secret.yml
 
@@ -28,3 +30,6 @@ actions-runner/
 .venv/
 .pdm.toml
 .pdm.lock
+
+k8s/monitoring/
+terraform/
