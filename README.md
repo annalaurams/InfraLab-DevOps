@@ -1,4 +1,4 @@
-# DevOps na Prática
+# Plataforma Fullstack com Orquestração e Observabilidade
 
 ## Descrição
 
